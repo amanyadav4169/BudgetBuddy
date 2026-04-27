@@ -1,9 +1,10 @@
 const { Expense } = require("../models/expense");
 
 
-class expense{
+class expense_class{
     static async  add_expense(id,name,category,expensevalue){
         try{
+        
         let new_expense = new Expense({
              "id": id,
         "name": name,
@@ -13,7 +14,7 @@ class expense{
         await new_expense.save();
     }
     catch(error){
-        return error;
+        console.log( error);
     }
     }
     static async show_expenses(){
@@ -22,6 +23,7 @@ class expense{
         return all_expenses;
         }
         catch(error){
+            console.log(error);
             return error;
         }
     }
@@ -36,6 +38,7 @@ class expense{
     }
     static async modify_expense(id,new_expense){
         try{
+            id=Number(id);
             let result = await Expense.findOneAndUpdate({id:id},{"expensevalue":new_expense});
             return result;
         }
@@ -44,4 +47,4 @@ class expense{
         }
     }
 }
-module.exports=expense;
+module.exports=expense_class;
